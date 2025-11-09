@@ -10,27 +10,26 @@ export default function Home() {
         {/* Desktop Header */}
         <div className="hidden lg:flex w-full px-4 xl:px-6 items-start">
           {/* Logo - Fixed on left */}
-          <div className="bg-[#ff6600] text-white flex flex-col justify-center items-center font-extrabold leading-none shadow-lg shrink-0" style={{ width: '280px', height: '160px' }}>
-            <span className="text-4xl block tracking-widest drop-shadow-md">GROCERY</span>
-            <span className="text-7xl block tracking-widest drop-shadow-md">STORE</span>
+          <div className="bg-[#ff6600] text-white flex flex-col justify-center items-center font-extrabold leading-none shadow-lg flex-shrink-0" style={{ width: '200px', height: '120px' }}>
+            <span className="text-3xl block tracking-widest drop-shadow-md">VSS</span>
+            <span className="text-5xl block tracking-widest drop-shadow-md">STORE</span>
           </div>
 
           {/* Navigation - Centered with no gaps */}
           <nav className="flex-1 flex justify-center items-center ml-4 overflow-x-auto">
             <div className="flex items-center justify-center gap-0">
               <NavItem title="HOME" color="bg-[#9ACD32]" active />
-              <NavItem title="SHOP ONLINE" color="bg-[#008080]" />
-              <NavItem title="MY ACCOUNT" color="bg-[#FFD700]" />
+             
               <NavItem title="SHOPPING GUIDE" color="bg-[#FF8C00]" hasDropdown />
               <NavItem title="SPECIALS" color="bg-[#9ACD32]" />
-              <NavItem title="RECIPES" color="bg-[#008080]" />
-              <NavItem title="EMPLOYMENT" color="bg-[#FFD700]" />
+       
+              
               <NavItem title="LOCATIONS" color="bg-[#FF8C00]" />
             </div>
           </nav>
 
           {/* Search Bar */}
-          <div className="ml-4 mt-10 flex items-center bg-white rounded-full pl-6 pr-3 py-3 shadow-inner border border-gray-200 shrink-0">
+          <div className="ml-4 mt-10 flex items-center bg-white rounded-full pl-6 pr-3 py-3 shadow-inner border border-gray-200 flex-shrink-0">
             <input
               type="text"
               placeholder="Search..."
@@ -56,7 +55,7 @@ export default function Home() {
                 placeholder="Search..."
                 className="outline-none text-base w-full text-gray-600 bg-transparent"
               />
-              <Search className="w-5 h-5 text-gray-400 cursor-pointer hover:text-[#ff6600] transition-colors shrink-0" />
+              <Search className="w-5 h-5 text-gray-400 cursor-pointer hover:text-[#ff6600] transition-colors flex-shrink-0" />
             </div>
           </div>
 
@@ -77,11 +76,11 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <main className="relative -mt-16 lg:-mt-44 pt-20 lg:pt-48 pb-8 lg:pb-8 overflow-hidden w-full lg:max-h-[110vh]">
+      <main className="relative -mt-16 lg:-mt-44 pt-20 lg:pt-52 pb-8 lg:pb-16 overflow-hidden w-full">
         {/* Background curved shape approximation */}
-        <div className="absolute top-0 left-0 right-0 h-[400px] lg:h-[550px] bg-white rounded-b-[50%] scale-x-150 translate-y-[-20%] z-0 opacity-50"></div>
+        <div className="absolute top-0 left-0 right-0 h-[400px] lg:h-[600px] bg-white rounded-b-[50%] scale-x-150 translate-y-[-20%] z-0 opacity-50"></div>
 
-        <div className="w-full px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center lg:items-center relative z-10">
+        <div className="w-full px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center lg:items-start relative z-10">
           {/* Woman Image Area */}
           <div className="lg:w-1/2 w-full flex justify-center lg:justify-start relative order-2 lg:order-1">
             <div className="relative w-full max-w-md lg:max-w-none">
@@ -98,21 +97,21 @@ export default function Home() {
           </div>
 
           {/* Hero Text Area */}
-          <div className="lg:w-1/2 text-center w-full relative order-1 lg:order-2 mb-8 lg:mb-0 lg:-ml-20 xl:-ml-24 z-20 flex flex-col items-center lg:justify-center">
+          <div className="lg:w-1/2 text-center w-full relative order-1 lg:order-2 mb-8 lg:mb-0 lg:-ml-20 xl:-ml-24 z-20 flex flex-col items-center">
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-extrabold leading-none drop-shadow-sm">
               <span className="text-[#FFD700] block">VITTHAL</span>
               <span className="text-[#ff6600] block">SUPER SHOPEE</span>
             </h1>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#008080] tracking-wide drop-shadow-sm">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#008080] mt-4 lg:mt-8 tracking-wide drop-shadow-sm">
               FOR TRUE GOURMETS
             </h2>
-            <button className="bg-[#9ACD32] text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold px-8 sm:px-10 lg:px-14 py-4 sm:py-5 lg:py-7 rounded-sm shadow-lg hover:bg-[#8bb82d] transition-all transform hover:-translate-y-1 active:translate-y-0 w-full sm:w-auto">
+            <button className="mt-6 lg:mt-12 bg-[#9ACD32] text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold px-8 sm:px-10 lg:px-14 py-4 sm:py-5 lg:py-7 rounded-sm shadow-lg hover:bg-[#8bb82d] transition-all transform hover:-translate-y-1 active:translate-y-0 w-full sm:w-auto">
               GREAT SHOPPING EXPERIENCE!
             </button>
           </div>
         </div>
       </main>
-      
+
       {/* Price of the Week Section */}
       <section className="bg-white py-12 lg:py-20 border-t-4 border-[#f0f0f0] relative -mt-20 sm:-mt-32 lg:-mt-52 z-20 w-full px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-7xl mx-auto">
@@ -149,7 +148,45 @@ export default function Home() {
       </section>
 
       {/* Footer Section */}
-      
+      <footer className="bg-[#f9f9f9] py-12 lg:py-16 border-t border-gray-200 text-gray-600 text-base mt-12 lg:mt-20 w-full px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          <div>
+            <h4 className="font-bold text-gray-800 text-lg mb-4 lg:mb-6 uppercase">ABOUT NETWORK</h4>
+            <ul className="space-y-2 lg:space-y-3">
+              <FooterItem>Gift Certificates</FooterItem>
+              <FooterItem>Quality control services</FooterItem>
+              <FooterItem>Service Monitoring</FooterItem>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-bold text-gray-800 text-lg mb-4 lg:mb-6 uppercase">CAREER</h4>
+            <ul className="space-y-2 lg:space-y-3">
+              <FooterItem>For graduates and students</FooterItem>
+              <FooterItem>Fill in the form</FooterItem>
+              <FooterItem>Jobs</FooterItem>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-bold text-gray-800 text-lg mb-4 lg:mb-6 uppercase">BUYER</h4>
+            <ul className="space-y-2 lg:space-y-3">
+              <FooterItem>Quality assurance of products</FooterItem>
+              <FooterItem>Return or exchange goods</FooterItem>
+              <FooterItem>Consumer Protection</FooterItem>
+            </ul>
+          </div>
+          <div className="sm:col-span-2 lg:col-span-1 mt-4 lg:mt-0 flex justify-center sm:justify-start lg:justify-end">
+            {/* Hotline Box */}
+            <div className="bg-[#ff6600] text-white p-4 sm:p-6 flex items-center rounded-sm shadow-lg w-full sm:max-w-[320px]">
+              <Phone size={48} className="sm:w-[60px] sm:h-[60px] opacity-30 mr-3 sm:mr-4 flex-shrink-0" strokeWidth={1.5} />
+              <div>
+                <div className="font-bold text-xl sm:text-2xl uppercase leading-none">HOT LINE</div>
+                <div className="font-bold text-2xl sm:text-4xl tracking-wider mt-1">+1 234 5678901</div>
+                <div className="text-xs sm:text-sm opacity-80 tracking-widest mt-1">7 DAYS: 9AM - 8PM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
@@ -163,7 +200,7 @@ function MobileNavItem({ title, color, active }) {
         active ? 'ring-2 ring-white' : ''
       }`}
     >
-      <span className="whitespace-nowCrap">{title}</span>
+      <span className="whitespace-nowrap">{title}</span>
     </div>
   );
 }
@@ -171,7 +208,7 @@ function MobileNavItem({ title, color, active }) {
 function NavItem({ title, color, active, hasDropdown }) {
   return (
     <div
-      className={`${color} text-white text-base xl:text-lg font-bold flex flex-col justify-center items-center text-center px-3 xl:px-4 h-28 xl:h-32 min-w-[110px] xl:min-w-[120px] cursor-pointer hover:brightness-110 transition-all leading-tight border-0 ${
+      className={`${color} text-white text-base xl:text-lg font-bold flex flex-col justify-center items-center text-center px-3 xl:px-4 h-24 xl:h-28 min-w-[110px] xl:min-w-[120px] cursor-pointer hover:brightness-110 transition-all leading-tight border-0 ${
         active ? 'pb-8 xl:pb-10' : ''
       }`}
     >
@@ -193,7 +230,7 @@ function OfferCard({ title, oldPrice, newPrice, discount, image }) {
           src={image}
           alt={title}
           className="h-48 sm:h-56 lg:h-64 w-full object-contain mx-auto transition-transform duration-300 group-hover:scale-110"
-          onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/400x300?text=Product' }}
+          onError={(e) => {e.target.onerror=null; e.target.src='https://via.placeholder.com/400x300?text=Product'}}
         />
         {/* Price Tags */}
         <div className="absolute top-0 right-0 flex flex-col items-end">
@@ -201,7 +238,7 @@ function OfferCard({ title, oldPrice, newPrice, discount, image }) {
             ${oldPrice}
           </span>
           <div className="flex shadow-lg">
-            <div className="bg-[#FFD700] text-white font-bold text-xl sm:text-2xl px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-center min-w-20 sm:min-w-[100px]">
+            <div className="bg-[#FFD700] text-white font-bold text-xl sm:text-2xl px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-center min-w-[80px] sm:min-w-[100px]">
               ${newPrice}
             </div>
             <div className="bg-[#ff0000] text-white text-sm sm:text-base font-bold px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-center ml-1">
