@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 
 // Offer Card (Duplicated for now, ideally should be a shared component)
