@@ -1,91 +1,198 @@
 'use client';
 
-import React from 'react';
-import { Search, Phone, ChevronDown } from 'lucide-react';
-
-// Reusable Nav Item
-const NavItem = ({ title, color, active, hasDropdown, className = '' }) => {
-  const words = title.split(' ');
-  return (
-    <div
-      className={`${color} text-white font-bold flex flex-col justify-center items-center text-center px-3 xl:px-4 h-24 xl:h-28 min-w-[110px] xl:min-w-[120px] cursor-pointer hover:brightness-110 transition-all duration-200 border-0 ${active ? 'pb-8 xl:pb-10' : ''
-        } ${className}`}
-    >
-      {words.map((word, i) => (
-        <span key={i} className="block whitespace-nowrap text-base xl:text-lg leading-tight">
-          {word}
-        </span>
-      ))}
-      {hasDropdown && (
-        <ChevronDown className="w-4 h-4 mt-1 animate-pulse" />
-      )}
-    </div>
-  );
-};
-
-// Mobile Nav Item
-const MobileNavItem = ({ title, color, active }) => (
-  <div
-    className={`${color} text-white text-xs sm:text-sm font-bold px-4 py-3 min-w-[100px] rounded-md cursor-pointer hover:brightness-110 transition-all duration-200 ${active ? 'ring-2 ring-white ring-offset-2 ring-offset-transparent' : ''
-      }`}
-  >
-    <span className="whitespace-nowrap">{title}</span>
-  </div>
-);
+import { 
+  Heart, 
+  Star, 
+  ChevronRight, 
+  Milk, 
+  Wheat, 
+  Coffee, 
+  ShoppingBag 
+} from 'lucide-react';
+import Hero from './components/Hero';
 
 // Offer Card
 const OfferCard = ({ title, oldPrice, newPrice, discount, image }) => (
-  <div className="group cursor-pointer bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
-    <div className="relative overflow-hidden">
-      <img
-        src={image}
-        alt={title}
-        className="h-56 sm:h-64 w-full object-contain mx-auto transition-transform duration-500 group-hover:scale-110"
-        loading="lazy"
-        onError={(e) => {
-          e.target.src = 'https://via.placeholder.com/400x300?text=Product';
-        }}
-      />
-      {/* Price Tags */}
-      <div className="absolute top-2 right-2 flex flex-col items-end space-y-1">
-        <span className="text-gray-500 line-through text-sm bg-white/80 px-2 py-1 rounded backdrop-blur-sm">
-          ${oldPrice}
+  <div className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+    <div className="relative p-4 flex-shrink-0">
+      {/* Discount Badge */}
+      <div className="absolute top-3 left-3 z-10">
+        <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-sm">
+          {discount} OFF
         </span>
-        <div className="flex shadow-md">
-          <div className="bg-yellow-400 text-white font-bold text-xl sm:text-2xl px-3 py-2 flex items-center">
-            ${newPrice}
-          </div>
-          <div className="bg-red-600 text-white font-bold text-sm px-3 py-2 ml-1 flex items-center">
-            {discount}
+      </div>
+      
+      {/* Action Buttons */}
+      <div className="absolute top-3 right-3 z-10 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <button className="p-2 bg-white rounded-full shadow-md hover:bg-orange-50 text-gray-600 hover:text-orange-600 transition-colors">
+          <Heart size={18} />
+        </button>
+      </div>
+
+      <div className="relative h-48 w-full flex items-center justify-center overflow-hidden rounded-lg bg-gray-50 group-hover:bg-white transition-colors">
+        <img
+          src={image}
+          alt={title}
+          className="h-40 w-auto object-contain transition-transform duration-500 group-hover:scale-110 mix-blend-multiply"
+          loading="lazy"
+          onError={(e) => {
+            e.target.src = 'https://via.placeholder.com/400x300?text=Product';
+          }}
+        />
+      </div>
+    </div>
+
+    <div className="p-4 flex flex-col flex-grow">
+      <div className="mb-2">
+        <div className="flex items-center gap-1 mb-1">
+          {[1, 2, 3, 4, 5].map((star) => (
+            <Star key={star} size={12} className="fill-yellow-400 text-yellow-400" />
+          ))}
+          <span className="text-xs text-gray-400 ml-1">(42)</span>
+        </div>
+        <h4 className="text-gray-800 font-bold text-sm sm:text-base leading-tight line-clamp-2 group-hover:text-orange-600 transition-colors min-h-[2.5rem]">
+          {title}
+        </h4>
+      </div>
+
+      <div className="mt-auto pt-3 border-t border-gray-50">
+        <div className="flex items-end justify-between">
+          <div className="flex flex-col">
+            <span className="text-gray-400 line-through text-xs">₹{oldPrice}</span>
+            <span className="text-xl font-extrabold text-gray-900">₹{newPrice}</span>
           </div>
         </div>
       </div>
     </div>
-    <div className="p-4">
-      <h4 className="text-steel-blue font-bold text-base sm:text-lg uppercase mb-2 hover:text-orange-600 transition-colors line-clamp-2">
-        {title}
-      </h4>
-      <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">
-        Premium quality product with fresh ingredients. Limited time offer!
-      </p>
-    </div>
   </div>
 );
 
-// Footer Link
-const FooterLink = ({ children }) => (
-  <li className="flex items-center group cursor-pointer py-1">
-    <span className="text-orange-600 mr-2 text-lg">•</span>
-    <span className="text-gray-600 group-hover:text-orange-600 transition-colors text-sm sm:text-base">
-      {children}
-    </span>
-  </li>
-);
-
 export default function Home() {
+  const products = [
+    // Essentials
+    {
+      id: 101,
+      category: "Essentials",
+      title: "SUNFLOWER OIL 1L",
+      oldPrice: "180",
+      newPrice: "150",
+      discount: "16%",
+      image: "https://placehold.co/400x300/png?text=Sunflower+Oil"
+    },
+    {
+      id: 102,
+      category: "Essentials",
+      title: "PREMIUM SUGAR 1KG",
+      oldPrice: "45",
+      newPrice: "40",
+      discount: "11%",
+      image: "https://placehold.co/400x300/png?text=Sugar"
+    },
+    {
+      id: 103,
+      category: "Essentials",
+      title: "RAW PEANUTS 500G",
+      oldPrice: "90",
+      newPrice: "80",
+      discount: "11%",
+      image: "https://placehold.co/400x300/png?text=Peanuts"
+    },
+    {
+      id: 104,
+      category: "Essentials",
+      title: "WHOLE WHEAT ATTA 10KG",
+      oldPrice: "450",
+      newPrice: "380",
+      discount: "15%",
+      image: "https://placehold.co/400x300/png?text=Wheat+Atta"
+    },
+    {
+      id: 105,
+      category: "Essentials",
+      title: "BASMATI RICE 5KG",
+      oldPrice: "600",
+      newPrice: "450",
+      discount: "25%",
+      image: "https://placehold.co/400x300/png?text=Basmati+Rice"
+    },
+    {
+      id: 106,
+      category: "Essentials",
+      title: "TATA SALT 1KG",
+      oldPrice: "28",
+      newPrice: "25",
+      discount: "10%",
+      image: "https://placehold.co/400x300/png?text=Tata+Salt"
+    },
+    {
+      id: 107,
+      category: "Essentials",
+      title: "TOOR DAL 1KG",
+      oldPrice: "160",
+      newPrice: "140",
+      discount: "12%",
+      image: "https://placehold.co/400x300/png?text=Toor+Dal"
+    },
+
+    // Dairy & Frozen
+    {
+      id: 201,
+      category: "Dairy & Frozen",
+      title: "AMUL BUTTER 500G",
+      oldPrice: "280",
+      newPrice: "265",
+      discount: "5%",
+      image: "https://placehold.co/400x300/png?text=Amul+Butter"
+    },
+    {
+      id: 202,
+      category: "Dairy & Frozen",
+      title: "FRESH CHICKEN BREAST",
+      oldPrice: "250",
+      newPrice: "200",
+      discount: "20%",
+      image: "https://placehold.co/400x300/png?text=Raw+Chicken"
+    },
+
+    // Snacks & Beverages
+    {
+      id: 301,
+      category: "Snacks & Beverages",
+      title: "MAGGI NOODLES 6-PACK",
+      oldPrice: "84",
+      newPrice: "75",
+      discount: "10%",
+      image: "https://placehold.co/400x300/png?text=Maggi"
+    },
+    {
+      id: 302,
+      category: "Snacks & Beverages",
+      title: "FRITOS CORN CHIPS",
+      oldPrice: "50",
+      newPrice: "30",
+      discount: "40%",
+      image: "https://placehold.co/400x300/png?text=Fritos+Bag"
+    },
+    {
+      id: 303,
+      category: "Snacks & Beverages",
+      title: "HEINEKEN 6-PACK",
+      oldPrice: "800",
+      newPrice: "650",
+      discount: "18%",
+      image: "https://placehold.co/400x300/png?text=Heineken"
+    }
+  ];
+
+  // Categories with Icons
+  const categories = [
+    { name: "Essentials", icon: Wheat },
+    { name: "Dairy & Frozen", icon: Milk },
+    { name: "Snacks & Beverages", icon: Coffee },
+  ];
+
   return (
     <>
-      {/* Inject Global Styles */}
       <style jsx global>{`
         @keyframes float {
           0%, 100% { transform: translateY(0); }
@@ -94,216 +201,112 @@ export default function Home() {
         .animate-float {
           animation: float 6s ease-in-out infinite;
         }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
           display: none;
         }
-
-        /* Realistic PNG Drop Shadow */
-        .shadow-png-pro {
-          filter: 
-            drop-shadow(0 25px 35px rgba(0,0,0,0.15))
-            drop-shadow(0 10px 15px rgba(0,0,0,0.1))
-            drop-shadow(0 4px 6px rgba(0,0,0,0.05));
-          transition: filter 0.4s ease;
-        }
-        .shadow-png-pro:hover {
-          filter: 
-            drop-shadow(0 30px 45px rgba(0,0,0,0.2))
-            drop-shadow(0 15px 20px rgba(0,0,0,0.15))
-            drop-shadow(0 6px 10px rgba(0,0,0,0.1));
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
         }
       `}</style>
 
-      <div className="min-h-screen bg-yellow-50 font-sans selection:bg-orange-200 w-full overflow-x-hidden">
-        {/* Header */}
-        <header className="relative z-50 w-full bg-gradient-to-b from-yellow-50 to-transparent">
-          {/* Desktop Header */}
-          <div className="hidden lg:flex items-start px-4 xl:px-6 pt-4">
-            {/* Logo */}
-            <div className="bg-orange-600 text-white flex flex-col justify-center items-center font-extrabold leading-none shadow-xl rounded-br-3xl w-52 h-32">
-              <span className="text-3xl tracking-widest drop-shadow-md">VSS</span>
-              <span className="text-5xl tracking-widest drop-shadow-md">STORE</span>
+      {/* 
+        Main Layout Container 
+        Row direction: Sidebar | Right Column
+      */}
+      <div className="flex bg-gray-50 items-start">
+        
+        {/* Sticky Sidebar (Left) */}
+        <aside className="hidden lg:flex w-72 flex-col bg-white border-r border-gray-200 h-screen sticky top-0 overflow-y-auto no-scrollbar z-20 shadow-[4px_0_24px_rgba(0,0,0,0.02)] flex-shrink-0">
+          <div className="p-6">
+            <div className="flex items-center gap-2 mb-6 px-2">
+              <ShoppingBag className="text-orange-600" size={24} />
+              <h3 className="font-extrabold text-lg text-gray-800 tracking-tight">CATEGORIES</h3>
             </div>
-
-            {/* Navigation */}
-            <nav className="flex-1 flex justify-center items-center ml-4">
-              <div className="flex items-center gap-0 rounded-lg overflow-hidden shadow-md">
-                <NavItem title="HOME" color="bg-lime-500" active />
-                <NavItem title="SHOPPING GUIDE" color="bg-orange-500" hasDropdown />
-                <NavItem title="SPECIALS" color="bg-lime-500" />
-                <NavItem title="LOCATIONS" color="bg-orange-500" />
-              </div>
+            
+            <nav className="space-y-1">
+              {categories.map((cat) => {
+                const Icon = cat.icon;
+                return (
+                  <a 
+                    key={cat.name}
+                    href={`#${cat.name.replace(/\s+/g, '-').toLowerCase()}`}
+                    className="group flex items-center gap-3 px-4 py-3.5 rounded-xl text-gray-600 hover:bg-orange-50 hover:text-orange-700 transition-all duration-200 font-medium"
+                  >
+                    <span className="p-2 bg-gray-100 rounded-lg group-hover:bg-orange-100 transition-colors text-gray-500 group-hover:text-orange-600">
+                      <Icon size={18} />
+                    </span>
+                    <span>{cat.name}</span>
+                    <ChevronRight className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-orange-400" size={16} />
+                  </a>
+                );
+              })}
             </nav>
 
-            {/* Search Bar */}
-            <div className="ml-4 mt-10">
-              <div className="flex items-center bg-white rounded-full pl-6 pr-3 py-3 shadow-lg border border-gray-200 w-64 xl:w-80 group focus-within:ring-2 focus-within:ring-orange-400 transition-all">
-                <input
-                  type="text"
-                  placeholder="Search products..."
-                  className="outline-none text-lg text-gray-700 bg-transparent flex-1"
-                  aria-label="Search products"
-                />
-                <Search className="w-6 h-6 text-gray-400 group-hover:text-orange-600 transition-colors cursor-pointer" />
-              </div>
+            {/* Sidebar Promo */}
+            <div className="mt-8 p-4 bg-gradient-to-br from-lime-500 to-lime-600 rounded-2xl text-white shadow-lg relative overflow-hidden group cursor-pointer">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-white opacity-10 rounded-full -mr-10 -mt-10 transition-transform group-hover:scale-150 duration-500"></div>
+              <h4 className="font-bold text-lg mb-1 relative z-10">Weekend Deal</h4>
+              <p className="text-lime-100 text-sm mb-3 relative z-10">Get flat 20% off on all dairy products!</p>
+              <button className="text-xs font-bold bg-white text-lime-600 px-3 py-2 rounded-lg shadow-sm hover:bg-lime-50 transition-colors relative z-10">
+                View Offers
+              </button>
             </div>
           </div>
+        </aside>
 
-          {/* Mobile Header */}
-          <div className="lg:hidden px-4 py-4">
-            <div className="flex items-center justify-between mb-4 gap-3">
-              {/* Mobile Logo */}
-              <div className="bg-orange-600 text-white flex flex-col justify-center items-center font-extrabold leading-none shadow-lg rounded-br-2xl w-44 h-28">
-                <span className="text-2xl tracking-widest drop-shadow-md">VSS</span>
-                <span className="text-4xl tracking-widest drop-shadow-md">STORE</span>
-              </div>
-
-              {/* Mobile Search */}
-              <div className="flex items-center bg-white rounded-full pl-4 pr-2 py-2 shadow-inner border border-gray-200 flex-1">
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  className="outline-none text-base text-gray-600 bg-transparent flex-1"
-                  aria-label="Search"
-                />
-                <Search className="w-5 h-5 text-gray-400 hover:text-orange-600 transition-colors" />
-              </div>
-            </div>
-
-            {/* Mobile Nav */}
-            <nav className="overflow-x-auto scrollbar-hide -mx-4 px-4">
-              <div className="flex gap-2 min-w-max pb-2">
-                <MobileNavItem title="HOME" color="bg-lime-500" active />
-                <MobileNavItem title="SHOP" color="bg-teal-600" />
-                <MobileNavItem title="ACCOUNT" color="bg-yellow-500" />
-                <MobileNavItem title="GUIDE" color="bg-orange-500" />
-                <MobileNavItem title="SPECIALS" color="bg-lime-500" />
-                <MobileNavItem title="RECIPES" color="bg-teal-600" />
-                <MobileNavItem title="JOBS" color="bg-yellow-500" />
-                <MobileNavItem title="LOCATIONS" color="bg-orange-5G0" />
-              </div>
-            </nav>
+        {/* Right Column (Hero + Products) */}
+        <div className="flex flex-col flex-1">
+          
+          {/* Hero Section (Scrolls with page) */}
+          <div className="relative z-10">
+            <Hero />
           </div>
-        </header>
 
-        {/* Hero Section */}
-        <main className="relative -mt-16 lg:-mt-24 pt-20 lg:pt-28 pb-12 lg:pb-16 overflow-hidden">
-          {/* Curved Background */}
-          <div className="absolute inset-x-0 top-0 h-full bg-white rounded-b-[50%] scale-x-150 -translate-y-1/4 opacity-60 pointer-events-none"></div>
-
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              
-              {/* Woman Image with PRO Shadow */}
-              <div className="order-1 lg:order-1 flex justify-center lg:justify-start relative">
-                <div className="relative max-w-md lg:max-w-lg w-full">
-                  <img
-                    src="/women.png"
-                    alt="Happy woman holding grocery bag"
-                    className="w-full h-auto object-contain shadow-png-pro animate-float"
-                    loading="lazy"
-                    onError={(e) => {
-                      e.target.src = 'https://via.placeholder.com/800x900?text=Woman+Grocery';
-                    }}
-                  />
-                </div>
-              </div>
-
-              {/* Hero Text */}
-              <div className="order-2 lg:order-2 text-center lg:text-left relative z-10 lg:-ml-35">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight">
-                  <span className="block text-yellow-400 drop-shadow-md">VITTHAL</span>
-                  <span className="block text-orange-600 drop-shadow-md">SUPER SHOPEE</span>
-                </h1>
-                <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-teal-700 mt-3 tracking-wide">
-                  FOR TRUE GOURMETS
-                </p>
-                <button className="mt-6 bg-lime-500 text-white font-bold text-lg sm:text-xl px-8 py-4 rounded-md shadow-xl hover:bg-lime-600 transform hover:-translate-y-1 transition-all duration-200 active:scale-95">
-                  GREAT SHOPPING EXPERIENCE!
-                </button>
-              </div>
-
-            </div>
-          </div>
-        </main>
-
-        {/* Price of the Week */}
-        <section className="py-16 lg:py-24 bg-white -mt-12 lg:-mt-20 relative z-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h3 className="text-3xl sm:text-4xl font-bold text-gray-700 uppercase mb-10 text-center lg:text-left tracking-tight">
-              PRICE OF THE WEEK
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              <OfferCard
-                title="FRESH CHICKEN BREAST"
-                oldPrice="27.99"
-                newPrice="22.99"
-                discount="-18%"
-                image="https://placehold.co/400x300/png?text=Raw+Chicken"
-              />
-              <OfferCard
-                title="FRITOS CORN CHIPS"
-                oldPrice="4.99"
-                newPrice="2.99"
-                discount="-40%"
-                image="https://placehold.co/400x300/png?text=Fritos+Bag"
-              />
-              <OfferCard
-                title="HEINEKEN 6-PACK"
-                oldPrice="12.99"
-                newPrice="9.99"
-                discount="-23%"
-                image="https://placehold.co/400x300/png?text=Heineken"
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* Footer */}
-        <footer className="bg-gray-50 py-16 border-t border-gray-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-              <div>
-                <h4 className="font-bold text-gray-800 text-lg uppercase mb-5">ABOUT NETWORK</h4>
-                <ul className="space-y-3">
-                  <FooterLink>Gift Certificates</FooterLink>
-                  <FooterLink>Quality Control</FooterLink>
-                  <FooterLink>Service Monitoring</FooterLink>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-bold text-gray-800 text-lg uppercase mb-5">CAREER</h4>
-                <ul className="space-y-3">
-                  <FooterLink>For Graduates</FooterLink>
-                  <FooterLink>Apply Online</FooterLink>
-                  <FooterLink>Current Openings</FooterLink>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-bold text-gray-800 text-lg uppercase mb-5">BUYER</h4>
-                <ul className="space-y-3">
-                  <FooterLink>Product Quality</FooterLink>
-                  <FooterLink>Returns & Exchange</FooterLink>
-                  <FooterLink>Consumer Rights</FooterLink>
-                </ul>
-              </div>
-              <div className="sm:col-span-2 lg:col-span-1">
-                <div className="bg-orange-600 text-white p-6 rounded-lg shadow-xl flex items-center space-x-4 max-w-sm mx-auto lg:mx-0">
-                  <Phone className="w-12 h-12 opacity-40" />
-                  <div>
-                    <p className="font-bold text-xl uppercase">HOT LINE</p>
-                    <p className="font-bold text-3xl tracking-wider">+1 234 567 8901</p>
-                    <p className="text-xs opacity-80 tracking-widest mt-1">7 DAYS: 9AM - 8PM</p>
+          {/* Product List */}
+          <main className="flex-1 bg-gray-50">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-8">
+              {categories.map((cat) => (
+                <section 
+                  key={cat.name} 
+                  id={cat.name.replace(/\s+/g, '-').toLowerCase()}
+                  className="mb-12 scroll-mt-8"
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-orange-100 text-orange-600 rounded-lg">
+                        <cat.icon size={24} />
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900">
+                        {cat.name}
+                      </h3>
+                    </div>
+                    <a href="#" className="text-sm font-bold text-orange-600 hover:text-orange-700 flex items-center gap-1">
+                      View All <ChevronRight size={16} />
+                    </a>
                   </div>
-                </div>
-              </div>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    {products
+                      .filter(p => p.category === cat.name)
+                      .map((product) => (
+                        <OfferCard
+                          key={product.id}
+                          title={product.title}
+                          oldPrice={product.oldPrice}
+                          newPrice={product.newPrice}
+                          discount={product.discount}
+                          image={product.image}
+                        />
+                      ))}
+                  </div>
+                </section>
+              ))}
             </div>
-          </div>
-        </footer>
+          </main>
+        </div>
       </div>
     </>
   );
