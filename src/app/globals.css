@@ -3,11 +3,19 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #2e7d32; /* Green 800 */
+  --primary-light: #4caf50; /* Green 500 */
+  --secondary: #fbc02d; /* Yellow 700 */
+  --accent: #ffeb3b; /* Yellow 500 */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -16,6 +24,10 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --primary: #4caf50;
+    --primary-light: #81c784;
+    --secondary: #fdd835;
+    --accent: #fff176;
   }
 }
 

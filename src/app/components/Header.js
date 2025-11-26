@@ -3,111 +3,73 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Search, ChevronDown } from 'lucide-react';
+import { Search, ShoppingCart, Menu } from 'lucide-react';
 
-// Reusable Nav Item
-const NavItem = ({ title, color, href, hasDropdown, className = '' }) => {
+const NavItem = ({ title, href, className = '' }) => {
   const pathname = usePathname();
   const isActive = pathname === href;
-  const words = title.split(' ');
   
   return (
     <Link 
       href={href} 
-      className={`${color} text-white font-bold flex flex-col justify-center items-center text-center px-3 xl:px-4 h-24 xl:h-28 min-w-[110px] xl:min-w-[120px] cursor-pointer hover:brightness-110 transition-all duration-200 border-0 no-underline ${isActive ? 'pb-8 xl:pb-10' : ''} ${className}`}
+      className={`relative font-bold text-sm xl:text-base px-4 py-2 transition-colors duration-200 ${
+        isActive ? 'text-green-700' : 'text-gray-600 hover:text-green-600'
+      } ${className}`}
     >
-      {words.map((word, i) => (
-        <span key={i} className="block whitespace-nowrap text-base xl:text-lg leading-tight">
-          {word}
-        </span>
-      ))}
-      {hasDropdown && (
-        <ChevronDown className="w-4 h-4 mt-1 animate-pulse" />
+      {title}
+      {isActive && (
+        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-green-600 rounded-full" />
       )}
-    </Link>
-  );
-};
-
-// Mobile Nav Item
-const MobileNavItem = ({ title, color, href }) => {
-  const pathname = usePathname();
-  const isActive = pathname === href;
-
-  return (
-    <Link 
-      href={href} 
-      className={`${color} text-white text-xs sm:text-sm font-bold px-4 py-3 min-w-[100px] rounded-md cursor-pointer hover:brightness-110 transition-all duration-200 no-underline ${isActive ? 'ring-2 ring-white ring-offset-2 ring-offset-transparent' : ''}`}
-    >
-      <span className="whitespace-nowrap">{title}</span>
     </Link>
   );
 };
 
 export default function Header() {
   return (
-    <header className="relative z-50 w-full bg-gradient-to-b from-yellow-50 to-transparent">
-      {/* Desktop Header */}
-      <div className="hidden lg:flex items-start px-4 xl:px-6 pt-4">
-        {/* Logo */}
-        <div className="bg-orange-600 text-white flex flex-col justify-center items-center font-extrabold leading-none shadow-xl rounded-br-3xl w-52 h-32">
-          <span className="text-3xl tracking-widest drop-shadow-md">VSS</span>
-          <span className="text-5xl tracking-widest drop-shadow-md">STORE</span>
-        </div>
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-20">
+          
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-105 transition-transform">
+              V
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xl sm:text-2xl font-extrabold text-gray-800 leading-none tracking-tight">
+                SUPER<span className="text-green-600">MART</span>
+              </span>
+              <span className="text-[0.65rem] font-bold text-gray-400 tracking-widest uppercase">
+                Kirana Store
+              </span>
+            </div>
+          </Link>
 
-        {/* Navigation */}
-        <nav className="flex-1 flex justify-center items-center ml-4">
-          <div className="flex items-center gap-0 rounded-lg overflow-hidden shadow-md">
-            <NavItem title="HOME" color="bg-lime-500" href="/" />
-            <NavItem title="SHOPPING GUIDE" color="bg-orange-500" href="/shopping-guide" hasDropdown />
-            <NavItem title="SPECIALS" color="bg-lime-500" href="/specials" />
-            <NavItem title="LOCATIONS" color="bg-orange-500" href="/locations" />
-          </div>
-        </nav>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-full border border-gray-100">
+            <NavItem title="Home" href="/" />
+            <NavItem title="Categories" href="/categories" />
+            <NavItem title="All Products" href="/products" />
+          </nav>
 
-        {/* Search Bar */}
-        <div className="ml-4 mt-10">
-          <div className="flex items-center bg-white rounded-full pl-6 pr-3 py-3 shadow-lg border border-gray-200 w-64 xl:w-80 group focus-within:ring-2 focus-within:ring-orange-400 transition-all">
-            <input
-              type="text"
-              placeholder="Search products..."
-              className="outline-none text-lg text-gray-700 bg-transparent flex-1"
-              aria-label="Search products"
-            />
-            <Search className="w-6 h-6 text-gray-400 group-hover:text-orange-600 transition-colors cursor-pointer" />
-          </div>
-        </div>
-      </div>
+          {/* Actions */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            {/* Search */}
+            <div className="hidden sm:flex items-center bg-gray-100 rounded-full px-4 py-2 focus-within:ring-2 focus-within:ring-green-500/20 transition-all w-48 lg:w-64">
+              <Search size={18} className="text-gray-400" />
+              <input 
+                type="text" 
+                placeholder="Search items..." 
+                className="bg-transparent border-none outline-none text-sm ml-2 w-full text-gray-700 placeholder-gray-400"
+              />
+            </div>
 
-      {/* Mobile Header */}
-      <div className="lg:hidden px-4 py-4">
-        <div className="flex items-center justify-between mb-4 gap-3">
-          {/* Mobile Logo */}
-          <div className="bg-orange-600 text-white flex flex-col justify-center items-center font-extrabold leading-none shadow-lg rounded-br-2xl w-44 h-28">
-            <span className="text-2xl tracking-widest drop-shadow-md">VSS</span>
-            <span className="text-4xl tracking-widest drop-shadow-md">STORE</span>
-          </div>
-
-          {/* Mobile Search */}
-          <div className="flex items-center bg-white rounded-full pl-4 pr-2 py-2 shadow-inner border border-gray-200 flex-1">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="outline-none text-base text-gray-600 bg-transparent flex-1"
-              aria-label="Search"
-            />
-            <Search className="w-5 h-5 text-gray-400 hover:text-orange-600 transition-colors" />
+            {/* Mobile Menu Button */}
+            <button className="md:hidden p-2 text-gray-600 hover:text-green-600 transition-colors">
+              <Menu size={24} />
+            </button>
           </div>
         </div>
-
-        {/* Mobile Nav */}
-        <nav className="overflow-x-auto scrollbar-hide -mx-4 px-4">
-          <div className="flex gap-2 min-w-max pb-2">
-            <MobileNavItem title="HOME" color="bg-lime-500" href="/" />
-            <MobileNavItem title="SHOPPING GUIDE" color="bg-orange-500" href="/shopping-guide" />
-            <MobileNavItem title="SPECIALS" color="bg-lime-500" href="/specials" />
-            <MobileNavItem title="LOCATIONS" color="bg-orange-500" href="/locations" />
-          </div>
-        </nav>
       </div>
     </header>
   );
