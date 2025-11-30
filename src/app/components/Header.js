@@ -37,7 +37,7 @@ export default function Header() {
             </div>
             <div className="flex flex-col">
               <span className="text-xl sm:text-2xl font-extrabold text-gray-800 leading-none tracking-tight">
-                SUPER<span className="text-green-600">MART</span>
+                VITHAL <span className="text-green-600">SUPER SHOPEE</span>
               </span>
               <span className="text-[0.65rem] font-bold text-gray-400 tracking-widest uppercase">
                 Kirana Store

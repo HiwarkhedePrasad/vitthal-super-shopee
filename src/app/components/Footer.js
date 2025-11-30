@@ -15,7 +15,7 @@ export default function Footer() {
                 V
               </div>
               <span className="text-xl font-extrabold text-gray-800">
-                SUPER<span className="text-green-600">MART</span>
+                VITHAL <span className="text-green-600">SUPER SHOPEE</span>
               </span>
             </div>
             <p className="text-gray-500 text-sm leading-relaxed">
@@ -75,7 +75,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-gray-400">
-            © {new Date().getFullYear()} Vitthal Super Shop. All rights reserved.
+            © {new Date().getFullYear()} Vithal Super Shopee. All rights reserved.
           </p>
           <div className="flex gap-6 text-xs text-gray-400">
             <a href="#" className="hover:text-gray-600">Privacy Policy</a>

@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Vitthal Super Shoppe",
+  title: "Vithal Super Shopee",
   description: "Local supermarket price checker",
 };
 
